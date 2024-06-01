@@ -16,7 +16,7 @@ export interface User {
   wallet: Wallet;
 }
 
-export type TransactionType = "deposit" | "withdraw"; //| "payment";
+export type TransactionType = "deposit" | "withdraw" | "payment";
 
 export interface CreateWalletTransaction {
   transactionType: TransactionType;
@@ -26,7 +26,7 @@ export interface CreateWalletTransaction {
 export interface Transaction {
   id: number;
   userId: number;
-  type: string;
+  type: TransactionType;
   amount: string;
   isDeleted: boolean;
   createdAt: string;

@@ -8,3 +8,9 @@ export const transactionTypeOptions = [
     value: "withdraw",
   },
 ];
+
+export const mapTransactionType = {
+  deposit: "Deposit",
+  withdraw: "Withdraw",
+  payment: "Payment",
+};

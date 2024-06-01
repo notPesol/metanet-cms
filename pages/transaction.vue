@@ -35,7 +35,7 @@
               class="border-t"
             >
               <td class="p-2">{{ transaction.id }}</td>
-              <td class="p-2">{{ transaction.type }}</td>
+              <td class="p-2">{{ mapTransactionType[transaction.type] }}</td>
               <td class="p-2">{{ transaction.amount }}</td>
               <td class="p-2">
                 {{ formatDateTime(transaction.createdAt) }}
