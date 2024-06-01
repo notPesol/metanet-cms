@@ -8,6 +8,7 @@
         <div class="mb-4">
           <label class="block text-gray-700 font-semibold">Username</label>
           <input
+            ref="usernameRef"
             v-model="username"
             type="text"
             class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-indigo-500"
@@ -53,7 +54,6 @@ definePageMeta({
   layout: false,
 });
 
-const config = useRuntimeConfig();
 const nuxtApp = useNuxtApp();
 const { $toast } = nuxtApp;
 
@@ -67,12 +67,27 @@ const { fetchData } = useApi();
 
 const isModeLogin = ref(true);
 
+const usernameRef = ref(null);
+
 const username = ref("");
 const password = ref("");
 const confirmPassword = ref("");
 
+onMounted(() => {
+  if (usernameRef.value) {
+    usernameRef.value.focus();
+  }
+});
+
+const clearInputValues = () => {
+  username.value = "";
+  password.value = "";
+  confirmPassword.value = "";
+};
+
 const toggleIsLoginMode = () => {
   isModeLogin.value = !isModeLogin.value;
+  clearInputValues();
 };
 
 const loginHandler = async () => {
