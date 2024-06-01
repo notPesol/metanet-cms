@@ -1,8 +1,4 @@
 <template>
-  <!-- <div
-    @click="$emit('clickOutside')"
-    class="min-h-full min-w-full absolute top-0 left-0 z-30"
-  ></div> -->
   <div
     class="min-h-full min-w-full absolute top-0 left-0 z-40 flex items-center justify-center"
   >
@@ -23,9 +19,3 @@
   </div>
   <!-- </div> -->
 </template>
-
-<script setup lang="ts">
-defineEmits<{
-  clickOutside: [];
-}>();
-</script>

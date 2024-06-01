@@ -48,7 +48,7 @@
         </div>
       </div>
     </div>
-    <Modal v-if="isShowModal" @clickOutside="() => setIsShowModal(false)">
+    <Modal v-if="isShowModal">
       <template #header>
         <h2 class="text-lg leading-6 font-medium text-gray-900">
           Make a transaction
