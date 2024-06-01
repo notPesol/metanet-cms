@@ -14,9 +14,9 @@ export const useApi = () => {
         ...options,
       });
       response = res;
-    } catch (error: any) {
-      console.error(error);
-      error = error;
+    } catch (e: any) {
+      console.error(e);
+      error = e;
     }
 
     return { response, error };
