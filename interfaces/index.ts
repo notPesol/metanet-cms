@@ -32,3 +32,8 @@ export interface Transaction {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface TableHeader {
+  label: string,
+  key: string,
+}

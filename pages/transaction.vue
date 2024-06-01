@@ -3,46 +3,14 @@
     <div>
       <h1 class="text-3xl font-bold mb-4">Transaction</h1>
       <div class="bg-white p-6 rounded-lg shadow-md">
-        <table class="min-w-full">
-          <thead>
-            <tr>
-              <th
-                class="p-2 bg-gray-200 text-left text-sm font-medium text-gray-700"
-              >
-                Id
-              </th>
-              <th
-                class="p-2 bg-gray-200 text-left text-sm font-medium text-gray-700"
-              >
-                Type
-              </th>
-              <th
-                class="p-2 bg-gray-200 text-left text-sm font-medium text-gray-700"
-              >
-                Amount
-              </th>
-              <th
-                class="p-2 bg-gray-200 text-left text-sm font-medium text-gray-700"
-              >
-                Create at
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              v-for="transaction in data"
-              :key="transaction.id"
-              class="border-t"
-            >
-              <td class="p-2">{{ transaction.id }}</td>
-              <td class="p-2">{{ mapTransactionType[transaction.type] }}</td>
-              <td class="p-2">{{ transaction.amount }}</td>
-              <td class="p-2">
-                {{ formatDateTime(transaction.createdAt) }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <Table :headers="tableHeaders" :rows="data">
+          <template #type="{ row }" :row>{{
+            displayTransactionType(row.type)
+          }}</template>
+          <template #createdAt="{ row }" :row>{{
+            formatDateTime(row.createdAt)
+          }}</template>
+        </Table>
         <div class="mt-4 flex gap-2 items-center justify-end">
           <label for="page" class="block text-gray-700 font-semibold"
             >Page</label
@@ -67,11 +35,18 @@
 </template>
 
 <script setup lang="ts">
-import type { Transaction } from "~/interfaces";
+import type { TableHeader, Transaction, TransactionType } from "~/interfaces";
 
 definePageMeta({
   middleware: "auth",
 });
+
+const tableHeaders: TableHeader[] = [
+  { label: "Id", key: "id" },
+  { label: "Type", key: "type" },
+  { label: "Amount", key: "amount" },
+  { label: "Created at", key: "createdAt" },
+];
 
 const nuxtApp = useNuxtApp();
 const { $toast } = nuxtApp;
@@ -97,6 +72,10 @@ const pageOptions = computed(() => {
   }
   return pages;
 });
+
+const displayTransactionType = (key: TransactionType) => {
+  return mapTransactionType[key];
+};
 
 const getTranasctions = async () => {
   if (!authStore.accessToken) {
