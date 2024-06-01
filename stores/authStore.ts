@@ -1,3 +1,5 @@
+import type { User } from "~/interfaces";
+
 interface IAuthState {
   accessToken: string;
   user: User | null;

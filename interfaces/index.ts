@@ -1,4 +1,4 @@
-interface Wallet {
+export interface Wallet {
   id: number;
   userId: number;
   balance: string;
@@ -7,7 +7,7 @@ interface Wallet {
   updatedAt: string;
 }
 
-interface User {
+export interface User {
   id: number;
   username: string;
   isDeleted: boolean;
@@ -16,14 +16,14 @@ interface User {
   wallet: Wallet;
 }
 
-type TransactionType = "deposit" | "withdraw"; //| "payment";
+export type TransactionType = "deposit" | "withdraw"; //| "payment";
 
-interface CreateWalletTransaction {
+export interface CreateWalletTransaction {
   transactionType: TransactionType;
   amount: number;
 }
 
-interface Transaction {
+export interface Transaction {
   id: number;
   userId: number;
   type: string;

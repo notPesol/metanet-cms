@@ -67,6 +67,8 @@
 </template>
 
 <script setup lang="ts">
+import type { Transaction } from "~/interfaces";
+
 definePageMeta({
   middleware: "auth",
 });

@@ -111,6 +111,12 @@
 </template>
 
 <script setup lang="ts">
+import type {
+  CreateWalletTransaction,
+  TransactionType,
+  Wallet,
+} from "~/interfaces";
+
 definePageMeta({
   middleware: "auth",
 });
