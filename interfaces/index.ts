@@ -37,3 +37,5 @@ export interface TableHeader {
   label: string,
   key: string,
 }
+
+export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "HEAD" | "OPTIONS";
