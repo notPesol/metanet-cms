@@ -48,7 +48,7 @@
         </div>
       </div>
     </div>
-    <Modal v-if="isShowModal">
+    <Modal v-if="isShowModal" @clickOutside="() => clearRefValues()">
       <template #header>
         <h2 class="text-lg leading-6 font-medium text-gray-900">
           Make a transaction
@@ -99,7 +99,7 @@
             Confirm
           </button>
           <button
-            @click="() => setIsShowModal(false)"
+            @click="() => clearRefValues()"
             class="bg-red-800 text-white p-2 rounded hover:bg-gray-700"
           >
             Close
