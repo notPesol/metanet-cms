@@ -35,13 +35,18 @@
 </template>
 
 <script setup lang="ts">
-import type { TableHeader, Transaction, TransactionType } from "~/interfaces";
+import type {
+  IResponse,
+  ITableHeader,
+  ITransaction,
+  TransactionType,
+} from "~/interfaces";
 
 definePageMeta({
   middleware: "auth",
 });
 
-const tableHeaders: TableHeader[] = [
+const tableHeaders: ITableHeader[] = [
   { label: "Id", key: "id" },
   { label: "Type", key: "type" },
   { label: "Amount", key: "amount" },
@@ -60,7 +65,7 @@ const { fetchData } = useApi();
 
 const page = ref(1);
 const totalPage = ref(1);
-const data = ref<Transaction[]>([]);
+const data = ref<ITransaction[]>([]);
 
 const pageOptions = computed(() => {
   const pages = [];
@@ -83,9 +88,12 @@ const getTranasctions = async () => {
   }
 
   setLoading(true);
-  const { response, error } = await fetchData("transaction/me", {
-    query: { page: page.value, limit: 10, count: true },
-  });
+  const { response, error } = await fetchData<IResponse<ITransaction[]>>(
+    "transaction/me",
+    {
+      query: { page: page.value, limit: 10, count: true },
+    }
+  );
 
   if (response) {
     data.value = response.data;

@@ -112,9 +112,10 @@
 
 <script setup lang="ts">
 import type {
-  CreateWalletTransaction,
+  ICreateWalletTransaction,
   TransactionType,
-  Wallet,
+  IWallet,
+  IResponse,
 } from "~/interfaces";
 
 definePageMeta({
@@ -132,7 +133,7 @@ const { setLoading } = uiStore;
 
 const { fetchData } = useApi();
 
-const wallet = ref<Wallet>();
+const wallet = ref<IWallet>();
 const isShowModal = ref(false);
 
 const selectedTransactionType = ref("deposit");
@@ -159,11 +160,11 @@ const makeTransaction = async () => {
   }
 
   setLoading(true);
-  const createWalletTransaction: CreateWalletTransaction = {
+  const createWalletTransaction: ICreateWalletTransaction = {
     transactionType: selectedTransactionType.value as TransactionType,
     amount: +inputAmount.value,
   };
-  const { response, error } = await fetchData("wallet", {
+  const { response, error } = await fetchData<IResponse<IWallet>>("wallet", {
     method: "POST",
     body: createWalletTransaction,
   });
@@ -187,7 +188,7 @@ const getWallet = async (isShowToat: boolean = true) => {
   }
 
   setLoading(true);
-  const { response, error } = await fetchData("wallet/me");
+  const { response, error } = await fetchData<IResponse<IWallet>>("wallet/me");
   if (response) {
     wallet.value = response.data;
     if (isShowToat) {
